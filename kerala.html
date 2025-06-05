@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>God's Own Country - Kerala Tourism</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
+    <style>
+        :root {
+            --primary: #0a5c36;
+            --secondary: #f9a51a;
+            --light: #f5f5f5;
+            --dark: #222;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+        
+        /* Header Styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            padding: 20px 0;
+        }
+        
+        header.scrolled {
+            background-color: rgba(10, 92, 54, 0.95);
+            padding: 10px 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            color: var(--secondary);
+            margin-right: 10px;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+        
+        .nav-links a:hover {
+            color: var(--secondary);
+        }
+        
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            color: white;
+            font-size: 24px;
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+        
+        .hero-content {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 0 20px;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+        
+        .hero-content h1 {
+            font-size: 5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+            animation: fadeInDown 1s ease;
+        }
+        
+        .hero-content p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease 0.3s both;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--secondary);
+            color: var(--dark);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            animation: fadeIn 1s ease 0.6s both;
+        }
+        
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* About Section */
+        .section {
+            padding: 100px 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+        
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            width: 70px;
+            height: 3px;
+            background: var(--secondary);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+        
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .about-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        .about-text p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* Destinations Slider */
+        .destinations {
+            background-color: #f9f9f9;
+        }
+        
+        .swiper {
+            width: 100%;
+            padding: 50px 0;
+        }
+        
+        .swiper-slide {
+            width: 300px;
+            height: 400px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        
+        .swiper-slide:hover {
+            transform: translateY(-10px);
+        }
+        
+        .swiper-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .slide-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+            transform: translateY(100px);
+            transition: transform 0.3s ease;
+        }
+        
+        .swiper-slide:hover .slide-content {
+            transform: translateY(0);
+        }
+        
+        .slide-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .slide-content p {
+            margin-bottom: 15px;
+            opacity: 0;
+            transition: opacity 0.3s ease 0.2s;
+        }
+        
+        .swiper-slide:hover .slide-content p {
+            opacity: 1;
+        }
+        
+        /* Experiences Section */
+        .experiences-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .experience-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .experience-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .experience-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .experience-content {
+            padding: 20px;
+        }
+        
+        .experience-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+        
+        .experience-content p {
+            margin-bottom: 15px;
+            color: #666;
+        }
+        
+        /* Gallery Section */
+        .gallery {
+            background-color: #f9f9f9;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-auto-rows: 200px;
+            gap: 15px;
+        }
+        
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .gallery-item:nth-child(1) {
+            grid-row: span 2;
+        }
+        
+        .gallery-item:nth-child(4) {
+            grid-column: span 2;
+        }
+        
+        .gallery-item:nth-child(7) {
+            grid-row: span 2;
+        }
+        
+        /* Testimonials */
+        .testimonials .swiper-slide {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            height: auto;
+        }
+        
+        .testimonial-content {
+            margin-bottom: 20px;
+            font-style: italic;
+            color: #555;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .testimonial-author img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+        }
+        
+        .author-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            color: var(--primary);
+        }
+        
+        .author-info p {
+            color: #777;
+            font-size: 0.9rem;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: white;
+            padding: 80px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 2px;
+            background: var(--secondary);
+            bottom: 0;
+            left: 0;
+        }
+        
+        .footer-column p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--secondary);
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--secondary);
+            color: var(--dark);
+            transform: translateY(-5px);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .hero-content h1 {
+                font-size: 3.5rem;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background-color: var(--primary);
+                flex-direction: column;
+                align-items: center;
+                padding-top: 40px;
+                transition: all 0.5s ease;
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .nav-links li {
+                margin: 15px 0;
+            }
+            
+            .menu-toggle {
+                display: block;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-content p {
+                font-size: 1rem;
+            }
+            
+            .section {
+                padding: 60px 0;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <nav class="navbar">
+            <a href="#" class="logo"><i class="fas fa-umbrella-beach"></i> Kerala Tourism</a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#destinations">Destinations</a></li>
+                <li><a href="#experiences">Experiences</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <video autoplay muted loop>
+            <source src="165391-832742138_small.mp4" type="video/mp4">
+        </video>
+        <div class="hero-content">
+            <h1>God's Own Country</h1>
+            <p>Discover the enchanting beauty of Kerala - a land of serene backwaters, lush green landscapes, exotic wildlife, and rich cultural heritage.</p>
+            <a href="#destinations" class="btn">Explore Now</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section" id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>About Kerala</h2>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Welcome to Paradise</h3>
+                    <p>Kerala, located on the southwestern coast of India, is often referred to as "God's Own Country" for its breathtaking natural beauty and unique cultural heritage. This tropical paradise is blessed with a diverse landscape that includes serene backwaters, golden beaches, lush hill stations, and exotic wildlife.</p>
+                    <p>The state is known for its Ayurvedic treatments, vibrant festivals like Onam and Thrissur Pooram, and delicious cuisine featuring coconut, spices, and fresh seafood. Kerala's literacy rate is the highest in India, and it's renowned for its progressive social indicators.</p>
+                    <p>With a network of 44 rivers, Kerala's backwaters are a once-in-a-lifetime experience, best enjoyed on a traditional houseboat. The Western Ghats provide stunning hill stations like Munnar and Wayanad, while the beaches of Kovalam and Varkala are perfect for relaxation.</p>
+                </div>
+                <div class="about-image">
+                    <img src="alappuzha1.jpg" alt="Kerala Backwaters">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Destinations Section -->
+    <section class="section destinations" id="destinations">
+        <div class="container">
+            <div class="section-title">
+                <h2>Popular Destinations</h2>
+            </div>
+            <div class="swiper destinations-slider">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <img src="ALLEPPEY.jpg" alt="Alleppey">
+                        <div class="slide-content">
+                            <h3>Alleppey</h3>
+                            <p>Famous for its backwaters, houseboats, and paddy fields. Often called the 'Venice of the East'.</p>
+                            <a href="#" class="btn">Explore</a>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="OIP.jpg" alt="Munnar">
+                        <div class="slide-content">
+                            <h3>Munnar</h3>
+                            <p>Beautiful hill station known for its tea plantations, rolling hills, and cool climate.</p>
+                            <a href="#" class="btn">Explore</a>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="kochi.jpg" alt="Kochi">
+                        <div class="slide-content">
+                            <h3>Kochi</h3>
+                            <p>Cosmopolitan city with a rich history, famous for its Chinese fishing nets and colonial architecture.</p>
+                            <a href="#" class="btn">Explore</a>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="wayanad.jpg" alt="Wayanad">
+                        <div class="slide-content">
+                            <h3>Wayanad</h3>
+                            <p>Lush green district with wildlife sanctuaries, waterfalls, and ancient caves.</p>
+                            <a href="#" class="btn">Explore</a>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="kovalam.jpg" alt="Kovalam">
+                        <div class="slide-content">
+                            <h3>Kovalam</h3>
+                            <p>Famous beach destination with crescent-shaped shoreline and lighthouse.</p>
+                            <a href="#" class="btn">Explore</a>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        
+                        <div class="slide-content">
+                            <img src="thekkady.jpeg" alt="thekkady" width=100%>
+                            <h3>Thekkady</h3>
+                            <p>Home to Periyar Wildlife Sanctuary, known for elephant rides and spice plantations.</p>
+                            <a href="#" class="btn">Explore</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experiences Section -->
+    <section class="section" id="experiences">
+        <div class="container">
+            <div class="section-title">
+                <h2>Unique Experiences</h2>
+            </div>
+            <div class="experiences-grid">
+                <div class="experience-card">
+                    <img src="house boat.jpg" alt="Houseboat">
+                    <div class="experience-content">
+                        <h3>Houseboat Cruise</h3>
+                        <p>Spend a night on traditional Kettuvallam houseboats in Alleppey or Kumarakom, floating through serene backwaters.</p>
+                        <a href="#" class="btn">Book Now</a>
+                    </div>
+                </div>
+                <div class="experience-card">
+                    <img src="ayurvdic.jpg" alt="Ayurveda">
+                    <div class="experience-content">
+                        <h3>Ayurvedic Retreat</h3>
+                        <p>Rejuvenate with authentic Ayurvedic treatments and therapies at world-class wellness centers.</p>
+                        <a href="#" class="btn">Book Now</a>
+                    </div>
+                </div>
+                <div class="experience-card">
+                    <img src="kadhakali.jpg" alt="Kathakali">
+                    <div class="experience-content">
+                        <h3>Kathakali Performance</h3>
+                        <p>Witness the vibrant classical dance-drama with elaborate costumes and expressive makeup.</p>
+                        <a href="#" class="btn">Book Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="section gallery" id="gallery">
+        <div class="container">
+            <div class="section-title">
+                <h2>Gallery</h2>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="p2.jpg" alt="Kerala 1">
+                </div>
+                <div class="gallery-item">
+                    <img src="p1.jpeg" alt="Kerala 2">
+                </div>
+                <div class="gallery-item">
+                    <img src="p3.jpg" alt="Kerala 3">
+                </div>
+                <div class="gallery-item">
+                    <img src="p4.jpg" alt="Kerala 4">
+                </div>
+                <div class="gallery-item">
+                    <img src="p5.jpeg" alt="Kerala 5">
+                </div>
+                <div class="gallery-item">
+                    <img src="p6.jpeg" alt="Kerala 6">
+                </div>
+                <div class="gallery-item">
+                    <img src="p7.jpeg" alt="Kerala 7">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="section testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>Traveler Stories</h2>
+            </div>
+            <div class="swiper testimonials-slider">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="testimonial-content">
+                            <p>"Kerala exceeded all my expectations! The backwaters were so peaceful, and the houseboat experience was unforgettable. The people were warm and welcoming, and the food was delicious."</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <img src="milan.jpg" alt="Sarah J.">
+                            <div class="author-info">
+                                <h4>MILAN S MOHAN</h4>
+                                <p>From Canada</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="testimonial-content">
+                            <p>"As a nature lover, Kerala was paradise. From the tea plantations of Munnar to the wildlife in Periyar, every day brought new wonders. The Ayurvedic massage was the most relaxing experience of my life."</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <img src="adwaith.jpg" alt="Michael T.">
+                            <div class="author-info">
+                                <h4>ADWAITH SASI</h4>
+                                <p>From Australia</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="testimonial-content">
+                            <p>"The cultural performances, especially Kathakali, were mesmerizing. Kerala's beaches are pristine, and the backwaters are unlike anything I've seen before. Can't wait to come back!"</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <img src="alwin.jpg" alt="Emma L.">
+                            <div class="author-info">
+                                <h4>ALWIN PERUMUND</h4>
+                                <p>From France</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>About Kerala</h3>
+                    <p>Kerala, a state on India's tropical Malabar Coast, has nearly 600km of Arabian Sea shoreline. It's known for its palm-lined beaches and backwaters, a network of canals.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About Kerala</a></li>
+                        <li><a href="#destinations">Destinations</a></li>
+                        <li><a href="#experiences">Experiences</a></li>
+                        <li><a href="#gallery">Gallery</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> thayyullathil</p>
+                    <p><i class="fas fa-phone"></i> +91 8590087957</p>
+                    <p><i class="fas fa-envelope"></i> miluachal@gmail.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Kerala Tourism. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <script>
+        // Mobile Menu Toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            menuToggle.querySelector('i').classList.toggle('fa-times');
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                menuToggle.querySelector('i').classList.remove('fa-times');
+            });
+        });
+        
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            header.classList.toggle('scrolled', window.scrollY > 100);
+        });
+        
+        // Initialize Swiper for destinations
+        const destinationsSwiper = new Swiper('.destinations-slider', {
+            slidesPerView: 1,
+            spaceBetween: 20,
+            pagination: {
+                el: '.destinations-slider .swiper-pagination',
+                clickable: true,
+            },
+            breakpoints: {
+                640: {
+                    slidesPerView: 2,
+                },
+                992: {
+                    slidesPerView: 3,
+                }
+            }
+        });
+        
+        // Initialize Swiper for testimonials
+        const testimonialsSwiper = new Swiper('.testimonials-slider', {
+            loop: true,
+            pagination: {
+                el: '.testimonials-slider .swiper-pagination',
+                clickable: true,
+            },
+            autoplay: {
+                delay: 5000,
+            },
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Animation on scroll
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.about-text, .about-image, .experience-card, .gallery-item');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.2;
+                
+                if (elementPosition < screenPosition) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        };
+        
+        // Set initial state for animated elements
+        document.querySelectorAll('.about-text, .about-image, .experience-card, .gallery-item').forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(50px)';
+            element.style.transition = 'all 0.5s ease';
+        });
+        
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+    </script>
+</body>
+</html>
